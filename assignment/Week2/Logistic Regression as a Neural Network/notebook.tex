@@ -1,0 +1,1242 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Logistic Regression with a Neural Network mindset}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{体现神经网络思想的逻辑回归}\label{ux4f53ux73b0ux795eux7ecfux7f51ux7edcux601dux60f3ux7684ux903bux8f91ux56deux5f52}
+
+接下来将构建一个逻辑回归分类器来判别是否是猫.这项任务将带领你学会如何借助神经思维来完成本项任务,同时也磨练你对深度学习的感觉.
+
+\textbf{说明}: -
+不要在代码中出现循环(while/for),除非说明中明确要求你这样做.
+
+\textbf{通过本次练习你将}: - 建立一个学习算法的一般架构,包括: -
+初始化参数 - 计算其cost(成本)函数和梯度 - 使用一种优化算法(梯度下降) -
+将函数按照正确的执行顺序,封装成为一个总的模型函数
+
+    \subsection{1 - 包}\label{ux5305}
+
+在开始我们的任务之前开始运行下方的一个单元,里面包含我们即将用到的一些包:
+- \href{www.numpy.org}{numpy} Python科学计算中最最基础和重要的包. -
+\href{http://www.h5py.org}{h5py}
+一个用于和存储在h5文件中的数据集交互的包 -
+\href{http://matplotlib.org}{matplotlib} 一个著名的使用Python来绘图的包
+- \href{http://www.pythonware.com/products/pil/}{PIL} 以及
+\href{https://www.scipy.org/}{scipy} 在这里我们用他们来测试自己的模型.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{h5py}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{ndimage}
+        \PY{k+kn}{from} \PY{n+nn}{lr\PYZus{}utils} \PY{k}{import} \PY{n}{load\PYZus{}dataset}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{2 - 问题概况}\label{ux95eeux9898ux6982ux51b5}
+
+\textbf{问题表述}:给定一个数据集("data.h5"),其包含: -
+一个训练集,大小为m\_train,标记为: 是猫(y=1),不是猫(y=0) -
+一个测试集,大小为m\_test,标记为: 是猫(y=1),不是猫(y=0) -
+每一张图像的大小(shape)为(num\_px, num\_px,
+3),其中3代表图像的三个通道.可以看出这里的图像为正方形,高度height=num\_px,
+宽度height=num\_px.
+
+我们将编写一个最简单的图像识别算法,来准确判别一张图像是猫,抑或不是猫.
+
+为了对于数据集更加熟悉,首先试着编写代码来加载我们的图像.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} 加载数据 (是猫/非猫)}
+        \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{load\PYZus{}dataset}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    我们在部分数据集(训练集还有测试集)变量之后增加"\_orig",因为我们需要预处理他们.经过预处理,变量将以"train\_set\_x","test\_set\_x"重新示人("train\_set\_y","test\_set\_y"不需要任何预处理操作).
+
+"train\_set\_x\_orig" 和
+"test\_set\_x\_orig"的每一行表示一张图象.运行下方代买来展示数据,改变索引值重新运行来查看其他图像.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} print(\PYZdq{}Train pictures: \PYZdq{},len(train\PYZus{}set\PYZus{}x\PYZus{}orig))}
+         \PY{c+c1}{\PYZsh{} print(\PYZdq{}Test pictures: \PYZdq{},len(test\PYZus{}set\PYZus{}x\PYZus{}orig))}
+         
+         \PY{c+c1}{\PYZsh{} 图像示例}
+         \PY{n}{index} \PY{o}{=} \PY{l+m+mi}{7}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y= }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{p}{)} \PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, it}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s a }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{classes}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ picture.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y= [1], it's a 'cat' picture.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    在深度学习中许多软件上的错误是在运算是矩阵或者向量的维度数不匹配造成的.如果你在整个过程中严格控制参与计算的矩阵和向量的维度,就能够消除相当一部分bugs.
+
+\textbf{练习}:弄清下面的几个关键指标: - m\_train : 训练集的个数 -
+m\_test : 测试集的个数 - num\_px : 对于测试集来说,等于图像的高度和宽度
+\texttt{train\_set\_x\_orig} 类型是大小为 (m\_train, num\_px, num\_px,
+3)的numpy
+array类型.因此,你可以编写如\texttt{train\_set\_x\_orig.shape{[}0{]}}来获取\texttt{m\_train}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 3 行代码)}
+         \PY{n}{m\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{m\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{num\PYZus{}px} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{训练样本的个数: m\PYZus{}train = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{测试样本的个数: m\PYZus{}test = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{每张图像的高度/宽度: num\PYZus{}px = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{每张图像的大小: (}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, 3)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}x 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}y 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}x 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}y 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+训练样本的个数: m\_train = 209
+测试样本的个数: m\_test = 50
+每张图像的高度/宽度: num\_px = 64
+每张图像的大小: (64, 64, 3)
+train\_set\_x 形状: (209, 64, 64, 3)
+train\_set\_y 形状: (1, 209)
+test\_set\_x 形状: (50, 64, 64, 3)
+test\_set\_y 形状: (1, 50)
+
+    \end{Verbatim}
+
+    \textbf{Expected Output for m\_train, m\_test and num\_px}:
+
+\begin{verbatim}
+<td>**m_train**</td>
+<td> 209 </td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**m_test**</td>
+<td> 50 </td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**num_px**</td>
+<td> 64 </td> 
+\end{verbatim}
+
+    方便起见,你现在应当重塑图像的形状(shape),有原来的(num\_px, num\_px,
+3)重塑为(num\_px\emph{num\_px}3, 1)的numpy
+array.经过处理,我们的训练(测试)集就是一个numpy
+array,其中每一列代表这一张展开的图片.而总共有m\_train列(对测试集而言有m\_test).
+
+\textbf{练习}:对训练集和测试集图像进行重塑,使得每张图像从原来的(num\_px,
+num\_px, 3)展开为(num\_px\emph{num\_px}3, 1)的向量.
+
+当你想将一个形状为(a, b, c, d)的矩阵 X 重塑为形状为(b\emph{c}d, a)的矩阵
+X\_flatten,可以这样:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    X_flatten }\OperatorTok{=}\NormalTok{ X.reshape(X.shape[}\DecValTok{0}\NormalTok{], }\OperatorTok{-}\DecValTok{1}\NormalTok{).T }\CommentTok{# X.T 表示求X的转置}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} 重塑训练和测试样本}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 行代码)}
+         \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}orig}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}x\PYZus{}flatten 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}set\PYZus{}y 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}x\PYZus{}flatten 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}set\PYZus{}y 形状: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{重塑后安全检测: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_set\_x\_flatten 形状: (12288, 209)
+train\_set\_y 形状: (1, 209)
+test\_set\_x\_flatten 形状: (12288, 50)
+test\_set\_y 形状: (1, 50)
+重塑后安全检测: [17 31 56 22 33]
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<td>**train_set_x_flatten shape**</td>
+<td> (12288, 209)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**train_set_y shape**</td>
+<td>(1, 209)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**test_set_x_flatten shape**</td>
+<td>(12288, 50)</td> 
+\end{verbatim}
+
+\begin{verbatim}
+<td>**test_set_y shape**</td>
+<td>(1, 50)</td> 
+\end{verbatim}
+
+\textbf{sanity check after reshaping}
+
+{[}17 31 56 22 33{]}
+
+    为了表示一张彩色图像，对于其中的每个像素都要规定其红色(red)，绿色(green)，蓝色(blue)(RGB)通道.所以,实际上每个像素都是一个三维的向量,其中每一维数值范围在{[}0,
+255{]}之间.
+
+在机器学习中,一个很普遍的预处理步骤就是对数据集进行取中心(center,
+动词)和标准化(standardize,动词).意思是,每个元素都要先减去整个数组(numpy
+array)的均值,人后除以整个数组(numpy
+array)的标准差.但是对于图像数据集而言,有更加简便的操纵,就是对数据集中的每一行除以255(一个像素通道中的最大值),也能得到比较好的效果.
+
+下面开始标准化我们的数据集.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{train\PYZus{}set\PYZus{}x} \PY{o}{=} \PY{n}{train\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{/}\PY{l+m+mi}{255}
+         \PY{n}{test\PYZus{}set\PYZus{}x} \PY{o}{=} \PY{n}{test\PYZus{}set\PYZus{}x\PYZus{}flatten}\PY{o}{/}\PY{l+m+mi}{255}
+\end{Verbatim}
+
+
+     \textbf{请牢记:}
+
+预处理一个新的数据集的常见步骤: - 弄清楚问题的维度数和形状 (m\_train,
+m\_test, num\_px, ...) - 重塑数据集,例如处理成每个样例为一个向量
+(num\_px * num\_px * 3, 1) - "标准化"数据
+
+    \subsection{3 -
+学习算法的一般结构}\label{ux5b66ux4e60ux7b97ux6cd5ux7684ux4e00ux822cux7ed3ux6784}
+
+现在是时候设计一个能从喵咪和非喵咪图像中把猫简易区分出来了的算法了.
+
+下面开始动手实现一个线性回归,其蕴含了神经网络的思想.下图解释了\textbf{为什么说线性回归是一种简单的神经网络!}
+
+\textbf{线性回归算法的数学表达式}: 对于一个输入样例(图像) \(x^{(i)}\):
+\[z^{(i)} = w^T x^{(i)} + b \tag{1}\]
+\[\hat{y}^{(i)} = a^{(i)} = sigmoid(z^{(i)})\tag{2}\]
+\[ \mathcal{L}(a^{(i)}, y^{(i)}) =  - y^{(i)}  \log(a^{(i)}) - (1-y^{(i)} )  \log(1-a^{(i)})\tag{3}\]
+
+将所有训练集的计算结果相加,求平均值可以得到总的成本(cost):
+\[ J = \frac{1}{m} \sum_{i=1}^m \mathcal{L}(a^{(i)}, y^{(i)})\tag{6}\]
+
+\textbf{关键步骤}:在此练习中,你应当进行下面几个步骤: -
+对模型中的参数进行初始化 - 通过最小化成本(cost)来学习参数 -
+(在测试集上)使用训练好的参数来进行预测 - 分析结果并得出结论
+
+    \subsection{4 -
+构建我们算法中的部分}\label{ux6784ux5efaux6211ux4eecux7b97ux6cd5ux4e2dux7684ux90e8ux5206}
+
+构建一个神经网络的主要步骤如下: 1. 定义模型的结构(例如输入特征的个数) 2.
+初始化模型的参数 3. 循环: - 计算当前层损失(前向传播) -
+计算当前层梯度(后向传播) - 更新参数(梯度下降)
+
+1-3
+步骤可以分开编写,最后将其整合到一个函数中,起名比如叫做\texttt{model()}.
+
+\subsubsection{4.1 - 辅助函数}\label{ux8f85ux52a9ux51fdux6570}
+
+\textbf{练习}:从之前的\texttt{Python\ numpy基础}中,实现\texttt{sigmoid()}.从上面的原理图可以看出,你需要计算\(sigmoid( w^T x + b) = \frac{1}{1 + e^{-(w^T x + b)}}\)
+来进行预测.其中会使用到np.exp().
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} 函数: sigmoid}
+         
+         \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    计算输入 z 的sigmoid值}
+         
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    z \PYZhy{}\PYZhy{} 一个标量或者任意大小的numpy array.}
+         
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    s \PYZhy{}\PYZhy{} sigmoid(z)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 行代码)}
+             \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sigmoid([0, 2]) = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sigmoid([0, 2]) = [ 0.5         0.88079708]
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<td>**sigmoid([0, 2])**</td>
+<td> [ 0.5         0.88079708]</td> 
+\end{verbatim}
+
+    \subsubsection{4.2 初始化参数}\label{ux521dux59cbux5316ux53c2ux6570}
+
+\textbf{练习}:实现参数的初始化.你可以将权重参数初始化零向量.(一般初学者才会这样做).如果你不知道应该用numpy中的什么函数,可以去numpy的官方文档中查找\texttt{np.zeros()}的用法.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} 函数: initialize\PYZus{}with\PYZus{}zeros}
+         
+         \PY{k}{def} \PY{n+nf}{initialize\PYZus{}with\PYZus{}zeros}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    本函数用来窗机一个零向量 w,shape为(dim, 1), b 初始化为0}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    dim \PYZhy{}\PYZhy{} w (权重) 向量的大小 (或者本例中表示参数的个数)}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} 初始化后的向量,大小为 (dim, 1)}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} 初始化后的标量(和偏差对应)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1行代码)}
+             \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{dim}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{assert}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{n}{dim}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n+nb}{float}\PY{p}{)} \PY{o+ow}{or} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{w}\PY{p}{,} \PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{w}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{initialize\PYZus{}with\PYZus{}zeros}\PY{p}{(}\PY{n}{dim}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+w = [[ 0.]
+ [ 0.]]
+b = 0
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<tr>
+    <td>  ** w **  </td>
+    <td> [[ 0.]
+\end{verbatim}
+
+{[} 0.{]}{]}
+
+\begin{verbatim}
+</tr>
+<tr>
+    <td>  ** b **  </td>
+    <td> 0 </td>
+</tr>
+\end{verbatim}
+
+For image inputs, w will be of shape (num\_px \(\times\) num\_px
+\(\times\) 3, 1).
+
+    \subsubsection{4.3 -
+前向传播和反向传播}\label{ux524dux5411ux4f20ux64adux548cux53cdux5411ux4f20ux64ad}
+
+参数初始化完毕,接下来可以使用"前向传播"和"反向传播"来更新你的参数.
+
+\textbf{练习}:实现函数 \texttt{propagate()} 来计算 cost 和梯度.
+
+\textbf{提示}: 前向传播: - 给定X - 计算出
+\(A = \sigma (w^T X+ b)=(a^{(0)}, a^{(1)},..., a^{(m-1)}, a^{(m)})\) -
+计算 cost 函数:
+\(J = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}\log(a^{(i)})+(1-y^{(i)})\log(1-a^{(i)})\)
+
+你将会用到一下两个方程式:
+
+\[ \frac{\partial J}{\partial w} = \frac{1}{m}X(A-Y)^T\tag{7}\]
+\[ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (a^{(i)}-y^{(i)})\tag{8}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} 函数: propagate}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         \PY{k}{def} \PY{n+nf}{propagate}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    实现上述的成本(cost)函数以及其梯度计算}
+         
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} 权重,shape 为 (num\PYZus{}px * num\PYZus{}px * 3, 1)的numpy array}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} 偏差, 一个标量}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} 数据的大小 (num\PYZus{}px * num\PYZus{}px * 3, 例子的个数)}
+         \PY{l+s+sd}{    Y \PYZhy{}\PYZhy{} 真实的标记向量 ( 0 代表非猫, 1 代表是猫) 大小为 (1, number of examples)}
+         
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    cost \PYZhy{}\PYZhy{} 逻辑回归的负对数似然成本(cost)}
+         \PY{l+s+sd}{    dw \PYZhy{}\PYZhy{} w 的损失的梯度, 因此和 w 的shape一致}
+         \PY{l+s+sd}{    db \PYZhy{}\PYZhy{} b 的损失的梯度, 因此和 b 的shape一致}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    小贴士:}
+         \PY{l+s+sd}{    \PYZhy{} 一步步地来写你的回归函数.会用到np.log(), np.dot()函数}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} 前向传播(从 X 到 COST)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 行代码)}
+             \PY{n}{Z}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{o}{+}\PY{n}{b}
+             \PY{n}{A} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{Z}\PY{p}{)}                                  \PY{c+c1}{\PYZsh{} 计算激活值}
+             \PY{n}{cost} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{Y}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{Y}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{A}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{m}\PY{p}{)}                             \PY{c+c1}{\PYZsh{} 计算 cost}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} 反向传播 (找到合适的梯度)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 行代码)}
+             \PY{n}{dw} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{A}\PY{o}{\PYZhy{}}\PY{n}{Y}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+             \PY{n}{db} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{\PYZhy{}}\PY{n}{Y}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n}{m}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{k}{assert}\PY{p}{(}\PY{n}{dw}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{db}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n+nb}{float}\PY{p}{)}
+             \PY{n}{cost} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{cost}\PY{p}{)}
+             \PY{k}{assert}\PY{p}{(}\PY{n}{cost}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{grads} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{dw}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{db}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{grads}\PY{p}{,} \PY{n}{cost}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{2.}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,}\PY{l+m+mf}{2.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{3.}\PY{p}{,}\PY{l+m+mf}{4.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.2}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{grads}\PY{p}{,} \PY{n}{cost} \PY{o}{=} \PY{n}{propagate}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cost = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{cost}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dw = [[ 0.99845601]
+ [ 2.39507239]]
+db = [ 0.00145558]
+cost = 5.801545319394553
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<tr>
+    <td>  ** dw **  </td>
+  <td> [[ 0.99845601]
+ [ 2.39507239]]</td>
+</tr>
+<tr>
+    <td>  ** db **  </td>
+    <td> 0.00145557813678 </td>
+</tr>
+<tr>
+    <td>  ** cost **  </td>
+    <td> 5.801545319394553 </td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{d) 优化}\label{d-ux4f18ux5316}
+
+\begin{itemize}
+\tightlist
+\item
+  你已经初始化了你的参数.
+\item
+  你也能够计算出一个cost 函数和其梯度.
+\item
+  现在,你想要使用梯度下降来更新你的参数.
+\end{itemize}
+
+\textbf{练习}:编写\texttt{optimize}函数.目标就是通过最小化cost
+函数值\(J\) 来学些\(w\)和\(b\).对于一个参数\(\theta\), 更新规则为 \$
+\theta = \theta - \alpha \text{ } d\theta\(,其中的\)\alpha\$是学习率.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} 函数: optimize}
+         
+         \PY{k}{def} \PY{n+nf}{optimize}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过梯度下降算法来优化 w 和 b.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} 权重,shape 为 (num\PYZus{}px * num\PYZus{}px * 3, 1)的numpy array}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} 偏差, 一个标量}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} 数据的大小 (num\PYZus{}px * num\PYZus{}px * 3, 例子的个数)}
+         \PY{l+s+sd}{    Y \PYZhy{}\PYZhy{} 真实的标记向量 ( 0 代表非猫, 1 代表是猫) 大小为 (1, number of examples)}
+         \PY{l+s+sd}{    num\PYZus{}iterations \PYZhy{}\PYZhy{} 优化过程中循环迭代的次数}
+         \PY{l+s+sd}{    learning\PYZus{}rate \PYZhy{}\PYZhy{} 学习率,梯度下降算法参数更新的法则}
+         \PY{l+s+sd}{    print\PYZus{}cost \PYZhy{}\PYZhy{} 为True的话,没一百次迭代打印一次loss值}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    params \PYZhy{}\PYZhy{} 一个字典,包含权重 w 和 偏差 b}
+         \PY{l+s+sd}{    grads \PYZhy{}\PYZhy{} 一个字典,其中包含 cost 函数对于权重 w 和偏差 b 的梯度(导数)}
+         \PY{l+s+sd}{    costs \PYZhy{}\PYZhy{} 一个列表,记录优化过程中计算得到的cost,用来绘制学习曲线}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    小贴士:}
+         \PY{l+s+sd}{    你总体上需要两个步骤,并不断迭代进行它们:}
+         \PY{l+s+sd}{        1) 对于当前的参数,计算其 cost 和梯度.通过上面的propagate()函数.}
+         \PY{l+s+sd}{        2) 式样梯度下降法来更新 w 和 b.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{costs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+                 
+                 
+                 \PY{c+c1}{\PYZsh{} Cost 和 梯度 计算 (≈ 1\PYZhy{}4 行代码)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} }
+                 \PY{n}{grads}\PY{p}{,} \PY{n}{cost} \PY{o}{=}  \PY{n}{propagate}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+                 
+                 \PY{c+c1}{\PYZsh{} 从传回参数中提取}
+                 \PY{n}{dw} \PY{o}{=} \PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 \PY{n}{db} \PY{o}{=} \PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{} 更新法则 (≈ 2 行代码)}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码卡死hi \PYZsh{}\PYZsh{}\PYZsh{}}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{w}\PY{o}{\PYZhy{}}\PY{n}{learning\PYZus{}rate}\PY{o}{*}\PY{n}{dw}
+                 \PY{n}{b} \PY{o}{=} \PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{learning\PYZus{}rate}\PY{o}{*}\PY{n}{db}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+                 
+                 \PY{c+c1}{\PYZsh{} 记录 cost 值}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{costs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cost}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} 每100从迭代大打印出一次 cost}
+                 \PY{k}{if} \PY{n}{print\PYZus{}cost} \PY{o+ow}{and} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{100} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{经过 }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{ 次迭代的 Cost: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{cost}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{w}\PY{p}{,}
+                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{b}\PY{p}{\PYZcb{}}
+             
+             \PY{n}{grads} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{dw}\PY{p}{,}
+                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{db}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{params}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{costs}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{params}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{costs} \PY{o}{=} \PY{n}{optimize}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.009}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{params}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{grads}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+w = [[ 0.19033591]
+ [ 0.12259159]]
+b = [ 1.92535983]
+dw = [[ 0.67752042]
+ [ 1.41625495]]
+db = [ 0.2191945]
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<tr>
+   <td> **w** </td>
+   <td>[[ 0.19033591]
+\end{verbatim}
+
+{[} 0.12259159{]}{]}
+
+\begin{verbatim}
+</tr>
+
+<tr>
+   <td> **b** </td>
+   <td> 1.92535983008 </td>
+</tr>
+<tr>
+   <td> **dw** </td>
+   <td> [[ 0.67752042]
+\end{verbatim}
+
+{[} 1.41625495{]}{]}
+
+\begin{verbatim}
+</tr>
+<tr>
+   <td> **db** </td>
+   <td> 0.219194504541 </td>
+</tr>
+\end{verbatim}
+
+    \textbf{练习:} 上面的函数会输出学习后的 w 和 b.
+我们能够使用这训练到的参数 w 和 b 对于一个数据集 X
+来进行预测.实现函数\texttt{predict()}.计算预测值遵循以下两步:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  计算 \(\hat{Y} = A = \sigma(w^T X + b)\)
+\item
+  将A预测值转化为0 或者
+  1(比如经过激活函数后,值\textgreater{}0.5,认为其为1;值\textless{}0.5,认为其值为0),将预测值存储到向量\texttt{Y\_prediction}中.
+  说明一点,如果有必要,可以在循环中使用\texttt{if/else}语句,当然也有与之等价的向量化的操作方法.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} 函数: predict}
+         
+         \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    使用学习到的参数 (w, b) , 来得出预测,输出标签 0 或者 1}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    w \PYZhy{}\PYZhy{} 权重,shape 为 (num\PYZus{}px * num\PYZus{}px * 3, 1)的numpy array}
+         \PY{l+s+sd}{    b \PYZhy{}\PYZhy{} 偏差, 一个标量}
+         \PY{l+s+sd}{    X \PYZhy{}\PYZhy{} 数据的大小 (num\PYZus{}px * num\PYZus{}px * 3, 例子的个数)}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    Y\PYZus{}prediction \PYZhy{}\PYZhy{} 一个numpy array (向量),包含对于输入X的所有预测(0/1)}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{Y\PYZus{}prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+             \PY{n}{w} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} 计算向量 \PYZdq{}A\PYZdq{} 预测一张图片中判断是猫的概率}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 行代码)}
+             \PY{n}{A} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{o}{+}\PY{n}{b}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} 将 A[0,i] 转换为 p[0,i]}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{} (≈ 4 行代码)}
+                 \PY{k}{if} \PY{n}{A}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.5} \PY{p}{:}
+                     \PY{n}{Y\PYZus{}prediction}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{Y\PYZus{}prediction}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{0}
+                 \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{assert}\PY{p}{(}\PY{n}{Y\PYZus{}prediction}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{Y\PYZus{}prediction}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.1124579}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.23106775}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{1.2}\PY{p}{,}\PY{l+m+mf}{2.}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{预测 = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+预测 = [[ 1.  1.  0.]]
+
+    \end{Verbatim}
+
+    \textbf{期望结果}:
+
+\begin{verbatim}
+<tr>
+     <td>
+         **预测**
+     </td>
+      <td>
+        [[ 1.  1.  0.]]
+     </td>  
+\end{verbatim}
+
+     \textbf{请牢记:} 你已经实现了上述几个函数: - 初始化 (w,b) -
+通过训话迭代学习(w,b)来优化损失(loss): - 计算cost 和其梯度 -
+使用梯度下降来更新参数 - 使用学到的 (w,b) 来对于一个给定的样例集预测标签
+
+    \subsubsection{5 -
+将所有函数整合成一个模型}\label{ux5c06ux6240ux6709ux51fdux6570ux6574ux5408ux6210ux4e00ux4e2aux6a21ux578b}
+
+现在，您将看到整个模型是如何构建的:
+将所有构建模块（前面部分中实现的功能）以正确的顺序放在一起。
+
+\textbf{练习}:实现 model 函数,请遵守以下符号约定: - Y\_prediction:
+在测试集上运行的结果 - Y\_prediction\_train: 在训练集上的预测结果 - w,
+costs, grads 接受经过optimize()处理后的返回值
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} 函数: model}
+         
+         \PY{k}{def} \PY{n+nf}{model}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过调用之前实现的函数,来构建逻辑回归的模型}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    参数:}
+         \PY{l+s+sd}{    X\PYZus{}train \PYZhy{}\PYZhy{} 训练集,表征为shape (num\PYZus{}px * num\PYZus{}px * 3, m\PYZus{}train)的numpy array}
+         \PY{l+s+sd}{    Y\PYZus{}train \PYZhy{}\PYZhy{} 训练集标签, 表征为一个 numpy array (向量), shape为 (1, m\PYZus{}train)}
+         \PY{l+s+sd}{    X\PYZus{}test \PYZhy{}\PYZhy{} 测试集, 表征为一个 numpy array, shape 为(num\PYZus{}px * num\PYZus{}px * 3, m\PYZus{}test)}
+         \PY{l+s+sd}{    Y\PYZus{}test \PYZhy{}\PYZhy{} 训练集标签, 表征为一个 numpy array (向量), shape为 (1, m\PYZus{}test)}
+         \PY{l+s+sd}{    num\PYZus{}iterations \PYZhy{}\PYZhy{} 超参数, 优化参数用来控制迭代次数}
+         \PY{l+s+sd}{    learning\PYZus{}rate \PYZhy{}\PYZhy{} 超参数, optimize()函数更新参数规则中的学习率设置}
+         \PY{l+s+sd}{    print\PYZus{}cost \PYZhy{}\PYZhy{} 为true,每100次迭代输出一次cost值}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    返回:}
+         \PY{l+s+sd}{    d \PYZhy{}\PYZhy{} 数据字典,包含此模型的所有关键信息.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} 初始化参数为0 (≈ 1 行代码)}
+             \PY{n}{w}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{initialize\PYZus{}with\PYZus{}zeros}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} 梯度下降 (≈ 1 行代码)}
+             \PY{n}{parameters}\PY{p}{,} \PY{n}{grads}\PY{p}{,} \PY{n}{costs} \PY{o}{=} \PY{n}{optimize}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{print\PYZus{}cost}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} 从字典\PYZdq{}parameters\PYZdq{}中提取参数 w 和 b}
+             \PY{n}{w} \PY{o}{=} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{b} \PY{o}{=} \PY{n}{parameters}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} 对训练/测试集进行预测 (≈ 2 行代码)}
+             \PY{n}{Y\PYZus{}prediction\PYZus{}test} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{n}{Y\PYZus{}prediction\PYZus{}train} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{b}\PY{p}{,}\PY{n}{X\PYZus{}train} \PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{c+c1}{\PYZsh{} print((100 \PYZhy{} np.mean(np.abs(Y\PYZus{}prediction\PYZus{}train \PYZhy{} Y\PYZus{}train)) * 100))}
+             \PY{c+c1}{\PYZsh{} 输出训练误差和测试误差 Errors}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train accuracy: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Y\PYZus{}prediction\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{Y\PYZus{}train}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test accuracy: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{Y\PYZus{}prediction\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{Y\PYZus{}test}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         
+             
+             \PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{costs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{costs}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}prediction\PYZus{}test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{Y\PYZus{}prediction\PYZus{}test}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}prediction\PYZus{}train}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{Y\PYZus{}prediction\PYZus{}train}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{w}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{b}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{learning\PYZus{}rate}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{num\PYZus{}iterations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{num\PYZus{}iterations}\PY{p}{\PYZcb{}}
+             
+             \PY{k}{return} \PY{n}{d}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{d} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.004}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+经过 0 次迭代的 Cost: 0.693147
+经过 100 次迭代的 Cost: 0.506765
+经过 200 次迭代的 Cost: 0.442269
+经过 300 次迭代的 Cost: 0.397201
+经过 400 次迭代的 Cost: 0.362439
+经过 500 次迭代的 Cost: 0.334271
+经过 600 次迭代的 Cost: 0.310725
+经过 700 次迭代的 Cost: 0.290608
+经过 800 次迭代的 Cost: 0.273138
+经过 900 次迭代的 Cost: 0.257771
+经过 1000 次迭代的 Cost: 0.244114
+经过 1100 次迭代的 Cost: 0.231873
+经过 1200 次迭代的 Cost: 0.220823
+经过 1300 次迭代的 Cost: 0.210787
+经过 1400 次迭代的 Cost: 0.201623
+经过 1500 次迭代的 Cost: 0.193217
+经过 1600 次迭代的 Cost: 0.185474
+经过 1700 次迭代的 Cost: 0.178317
+经过 1800 次迭代的 Cost: 0.171678
+经过 1900 次迭代的 Cost: 0.165504
+train accuracy: 98.08612440191388 \%
+test accuracy: 70.0 \%
+
+    \end{Verbatim}
+
+    \textbf{期望输出}:
+
+\begin{verbatim}
+<tr>
+    <td> **Cost after iteration 0 **  </td> 
+    <td> 0.693147 </td>
+</tr>
+  <tr>
+    <td> <center> $\vdots$ </center> </td> 
+    <td> <center> $\vdots$ </center> </td> 
+</tr>  
+<tr>
+    <td> **Train Accuracy**  </td> 
+    <td> 99.04306220095694 % </td>
+</tr>
+
+<tr>
+    <td>**Test Accuracy** </td> 
+    <td> 70.0 % </td>
+</tr>
+\end{verbatim}
+
+    \textbf{注释}:
+训练准确度已经接近100\%,说明模型对于训练集数据有很好的拟合.测试误差为70\%左右.对于这个简单模型而言已经足够好,毕竟我们目前使用的还是线性分类器.在之后的学习中,我们会使用更好的分类器.
+
+并且我们很明显就能看出,模型对于测试数据有过拟合.之后我们还会学习一些防止过度拟合的方法,比如说正则化.运行下方代码,来看看模型在测试集上的预测结果和实际结果.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{} 模型在测试集上的预测结果.}
+         \PY{n}{index} \PY{o}{=} \PY{l+m+mi}{25}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{,} \PY{n}{num\PYZus{}px}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{预测值: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y\PYZus{}prediction\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y = 1
+预测值:  1.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{c+c1}{\PYZsh{} 学习曲线图像 (带有cost值)}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{costs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{costs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iterations (per hundreds)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{u}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Learning rate =}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{解释}:你可以看到cost在下降.它表明参数正在被学习.但是，在训练集上进一步训练模型.
+比如尝试增加上面单元格中的迭代次数，然后重新运行单元格.
+您可能会看到训练集的准确度上升，但测试集准确度下降. 这被称为过度拟合.
+
+    \subsection{6 - 进一步分析}\label{ux8fdbux4e00ux6b65ux5206ux6790}
+
+恭喜你成功搭建一的第一个图像分类模型.让我们进一步分析,检查调整学习率\(\alpha\).
+
+    \paragraph{学习率的选择}\label{ux5b66ux4e60ux7387ux7684ux9009ux62e9}
+
+\textbf{回顾}:
+为了是梯度下降运行的结果更好,你必须明智地选择学习率.学习率\(\alpha\)决定着我们更新参数的速率.如果学习率太高，我们可能会"错过"最优值.同样，如果它太小，我们将需要太多次迭代来收敛到最佳值.这就是为什么选择一个合适的学习率至关重要的原因.
+
+让我们选取几个学习率运行模型,绘制其学习曲线并比较.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{learning\PYZus{}rates} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.0001}\PY{p}{]}
+         \PY{n}{models} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{learning\PYZus{}rates}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{学习率: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+             \PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{train\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{train\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}x}\PY{p}{,} \PY{n}{test\PYZus{}set\PYZus{}y}\PY{p}{,} \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{1500}\PY{p}{,} \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{print\PYZus{}cost} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{learning\PYZus{}rates}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{costs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{models}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{legend} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{frame} \PY{o}{=} \PY{n}{legend}\PY{o}{.}\PY{n}{get\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{frame}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0.90}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+学习率: 0.01
+train accuracy: 99.52153110047847 \%
+test accuracy: 68.0 \%
+
+-------------------------------------------------------
+
+学习率: 0.001
+train accuracy: 88.99521531100478 \%
+test accuracy: 64.0 \%
+
+-------------------------------------------------------
+
+学习率: 0.0001
+train accuracy: 68.42105263157895 \%
+test accuracy: 36.0 \%
+
+-------------------------------------------------------
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{7 -
+将自己的图片作为输入}\label{ux5c06ux81eaux5df1ux7684ux56feux7247ux4f5cux4e3aux8f93ux5165}
+
+将自己的图片作为输入来测试你的模型. 1.
+点击notebook上方工具条中的\texttt{File},点击\texttt{open} 2.
+进入本工程路径下,将自己的图片上传到\texttt{images}文件夹下 3.
+将下方代码中文件名改为自己上传图片的名称 4.
+运行下发代码,并检查算法运行的正确性(1: 是猫; 0:非猫)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 代码开始 \PYZsh{}\PYZsh{} (PUT YOUR IMAGE NAME) }
+          \PY{n}{my\PYZus{}image} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my\PYZus{}image1.jpg}\PY{l+s+s2}{\PYZdq{}}   \PY{c+c1}{\PYZsh{} 将其改为你自己的图像文件名}
+          \PY{c+c1}{\PYZsh{}\PYZsh{} 代码结束 \PYZsh{}\PYZsh{}}
+          
+          \PY{c+c1}{\PYZsh{} 预处理图像以适应于本模型}
+          \PY{n}{fname} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{my\PYZus{}image}
+          \PY{n}{image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ndimage}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{n}{flatten}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+          \PY{n}{my\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imresize}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{num\PYZus{}px}\PY{p}{,}\PY{n}{num\PYZus{}px}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}px}\PY{o}{*}\PY{n}{num\PYZus{}px}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          \PY{n}{my\PYZus{}predicted\PYZus{}image} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{d}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{my\PYZus{}image}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{my\PYZus{}predicted\PYZus{}image}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, 模型预测是一张 }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{classes}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{my\PYZus{}predicted\PYZus{}image}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+}  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ 图像.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y = 1.0, 模型预测是一张 "cat" 图像.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \textbf{通过本任务}: 1. 预处理数据很重要 2. 分别实现函数:initialize(),
+propagate(), optimize().然后构建了一个模型 model() 3.
+设置不同的学习率对于算法的效果影响至关重要.
+
+    一些有意义的尝试: - 试着改变学习率和迭代的次数 -
+尝试不同的初始化方法(随机初始化)来比较结果 -
+测试其他预处理方法(取数据中心,或则会每一行除以其标准差)
+
+    \textbf{参考}: -
+http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/
+-
+https://stats.stackexchange.com/questions/211436/why-do-we-normalize-images-by-subtracting-the-datasets-image-mean-and-not-the-c
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
